@@ -20,31 +20,6 @@
     closeModal();
   }
   
-  let generate_toke = $('#generate_toke')
-    generate_toke.submit(function (e) {
-    const xhr = new XMLHttpRequest();
-		const url = "https://sendmail.rf.htu.edu.gh/sendEmail.php";
-		xhr.open("POST", url);
-		xhr.onreadystatechange = someHandler;
-		xhr.send();
-        e.preventDefault()
-        $.ajax({
-            url: generate_toke.attr('action'),
-            type: 'post',
-            dataType: 'json',
-            cache: false,
-            contentType: false,
-            processData: false,
-            data: new FormData(this),
-            success: function (res) {
-                if (res.status === 201){
-                    toastAlert('success', res.message)
-                    redirect('https://tsuks-marvelous-project.webflow.io/dashboard?emailStatus=sent')
-                }
-            }
-        })
-    })
-
   // Event listeners for the buttons
   openModalButton.addEventListener("click", openModal);
   closeModalButton.addEventListener("click", closeModal);
@@ -56,19 +31,6 @@
       closeModal();
     }
   });
-
-
-
-function logout() {
-  firebase.auth().signOut()
-    .then(() => {
-      // User signed out successfully
-      window.location.href = "https://tsuks-marvelous-project.webflow.io/agent-login";
-    })
-    .catch((error) => {
-      console.error('Logout error:', error);
-    });
-}
 
  $(function () {
     $("#data-table").DataTable({
